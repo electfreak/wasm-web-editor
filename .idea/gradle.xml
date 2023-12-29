@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/editor-backend" name="editor-backend">
+                <projects>
+                  <project path="$PROJECT_DIR$/editor-backend" />
+                </projects>
+              </build>
+              <build path="$PROJECT_DIR$/editor-frontend" name="editor-frontend">
+                <projects>
+                  <project path="$PROJECT_DIR$/editor-frontend" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="corretto-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/editor-backend" />
+            <option value="$PROJECT_DIR$/editor-frontend" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

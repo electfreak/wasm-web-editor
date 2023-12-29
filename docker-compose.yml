@@ -1,0 +1,30 @@
+services:
+  db:
+    image: "postgres"
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    hostname: ${POSTGRES_HOSTNAME}
+
+  backend:
+    build: editor-backend
+    ports:
+      - "8082:8082"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOSTNAME=${POSTGRES_HOSTNAME}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+    depends_on:
+      - db
+
+  frontend:
+    build: editor-frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend

@@ -1,0 +1,108 @@
+:root {
+    --gray: rgba(39, 40, 44, 0.2);
+    --gray-dark: rgba(39, 40, 44, 0.5);
+}
+
+html {
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+select {
+    appearance: none;
+    font-size: 15px;
+    padding: 16px;
+    padding-right: 30px;
+    margin: 0;
+    width: 100%;
+    cursor: inherit;
+    line-height: inherit;
+    border: solid 1px var(--gray);
+    display: grid;
+}
+
+.select {
+    position: relative;
+}
+
+.select::after {
+    content: "";
+    position: absolute;
+    right: 9px;
+    top: 21px;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--gray-dark);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+input[type="text"] {
+    border: solid 1px var(--gray);
+    padding: 16px;
+    width: 100%;
+    font-size: 15px;
+}
+
+button {
+    /*width: 100%;*/
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    padding: 15px 30px;
+    transition: .3s;
+}
+
+button:hover {
+    background-color: var(--gray-dark);
+}
+
+.editor {
+    width: 50%;
+    border: solid 1px var(--gray);
+    border-radius: 5px;
+    overflow: hidden;
+    height: 50vh;
+}
+
+.editor-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.editor-controls ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.editor-controls li {
+    display: flex;
+    gap: 5px;
+}
+
+.editor-controls li:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.save {
+    margin-top: auto;
+}
+
+.filename-item {
+    flex-grow: 1;
+}
+
+.filename-close {
+    padding: 15px;
+    margin-left: auto;
+    flex-grow: 0;
+}
