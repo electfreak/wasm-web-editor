@@ -2,18 +2,26 @@ import kotlinx.browser.window
 import kotlinx.dom.appendElement
 import kotlinx.dom.appendText
 import org.w3c.dom.HTMLButtonElement
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLOptionElement
+import org.w3c.dom.get
 
 external interface File {
     val name: String
     val body: String
 }
 
+private fun removeChildren(element: HTMLElement) {
+    while (element.children.length > 0) {
+        element.children[0]?.remove()
+    }
+}
+
 internal fun fillFileNames(fileNames: JsArray<JsString>) {
-    Global.filesEl.textContent = "" // TODO: more accurate delete
+    removeChildren(Global.filesEl)
 
     for (i in 0..<fileNames.length) {
-        val name = fileNames.get(i).toString()
+        val name = fileNames[i].toString()
         Global.filesEl.appendElement("li") {
             appendElement("button") {
                 this as HTMLButtonElement
@@ -76,7 +84,7 @@ internal fun fillFile(file: File) {
 
 internal fun loadFile(fileName: String) {
     window.fetch("$API_DOMAIN/file/$fileName")
-        .then {
+        .then { it ->
             if (it.ok) {
                 it.json().then {
                     it as File
@@ -99,14 +107,14 @@ internal fun setEmptyFile() {
 
 internal fun loadFiles() {
     window.fetch("$API_DOMAIN/filenames")
-        .then {
+        .then { it ->
             if (it.ok) {
                 it.json().then {
                     it as JsArray<JsString>
                     fillFileNames(it)
                     if (Global.currentFile == null) {
                         if (it.length > 0) {
-                            loadFile(it.get(0).toString())
+                            loadFile(it[0].toString())
                         } else {
                             setEmptyFile()
                         }
