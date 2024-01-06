@@ -1,10 +1,7 @@
 import kotlinx.browser.window
 import kotlinx.dom.appendElement
 import kotlinx.dom.appendText
-import org.w3c.dom.HTMLButtonElement
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.HTMLOptionElement
-import org.w3c.dom.get
+import org.w3c.dom.*
 
 external interface File {
     val name: String
@@ -36,7 +33,12 @@ internal fun fillFileNames(fileNames: JsArray<JsString>) {
                 this as HTMLButtonElement
                 type = "button"
                 className = "filename-close"
-                appendText("X")
+                appendElement("img") {
+                    this as HTMLImageElement
+                    src = "/cross.svg"
+                    width = 10
+                }
+
                 onclick = {
                     deleteFile(name)
                 }

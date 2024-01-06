@@ -19,5 +19,4 @@ fun main() {
     saveBtn.onclick = {
         saveCurrFile()
     }
-
 }
