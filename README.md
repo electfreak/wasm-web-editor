@@ -4,6 +4,7 @@
 ```shell
 docker compose up
 ```
+Front-end should appear on [localhost:8080](http://localhost:8080)
 
 or
 
