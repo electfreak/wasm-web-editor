@@ -21,12 +21,12 @@ fun getRequestInit(method: String, body: JsString?) = RequestInit(
 
 
 object JSObjects {
-    val editorEl = document.querySelector(".editor") as HTMLDivElement
-    val controlsEl = document.querySelector(".editor-controls") as HTMLDivElement
+    private val editorEl = document.querySelector(".editor") as HTMLDivElement
+    private val controlsEl = document.querySelector(".editor-controls") as HTMLDivElement
     val selectSyntaxEl = controlsEl.querySelector(".select select") as HTMLSelectElement
     val filesEl = document.querySelector(".files ul") as HTMLUListElement
     val fileNameEl = document.querySelector(".filename") as HTMLInputElement
     val saveEl = document.querySelector(".save button") as HTMLButtonElement
 
-    val monacoEditor = monaco.editor.create(editorEl, IEditorConfig(value = "Loading...", language = DEFAULT_LANG))
+    val monacoEditor = monaco.editor.create(editorEl, getIEditorConfig(value = "Loading...", language = DEFAULT_LANG))
 }

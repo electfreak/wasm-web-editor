@@ -1,3 +1,4 @@
+@Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE", "UNCHECKED_CAST")
 object EditorController {
     var currFileName = "untitled"
     private val fileNames = mutableListOf<String>()

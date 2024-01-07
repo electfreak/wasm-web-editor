@@ -1,6 +1,7 @@
 import kotlinx.browser.window
 import kotlin.js.Promise
 
+@Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE", "UNCHECKED_CAST")
 object EditorModel {
     internal fun saveFile(fileName: String, content: String) {
         window.fetch(

@@ -9,11 +9,12 @@ enum class Lang(val lang: String) {
     PLAIN("plaintext")
 }
 
-fun IEditorConfig(value: String, language: Lang): JsAny {
-    return _IEditorConfig(value, language.lang)
+fun getIEditorConfig(value: String, language: Lang): JsAny {
+    return getJsIEditorConfig(value, language.lang)
 }
 
-private fun _IEditorConfig(value: String, language: String): JsAny =
+@Suppress("UNUSED_PARAMETER")
+private fun getJsIEditorConfig(value: String, language: String): JsAny =
     js("({ value: value, language: language, automaticLayout: true, minimap: { enabled: false } })")
 
 external object Model : JsAny {
@@ -25,6 +26,7 @@ external object Editor : JsAny {
     fun getValue(): String
 }
 
+@Suppress("ClassName")
 @JsModule("monaco-editor")
 external object monaco : JsAny {
     object editor : JsAny {
