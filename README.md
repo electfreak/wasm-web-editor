@@ -1,3 +1,11 @@
+# Text editor using Kotlin/wasm and Monaco Editor
+
+Simple text editor using Monaco Editor and Kotlin/wasm. 
+
+Monaco Editor gives us cool text editing features like syntax highlighting and auto-completion, while Kotlin/wasm lets us run Kotlin code right in web browsers. 
+
+![screenshot](./screenshot.png)
+
 ## How to run
 
 ### Using docker-compose:

@@ -13,51 +13,69 @@ object EditorController {
 
     internal fun saveCurrFile() {
         EditorModel.saveFile(currFileName, EditorView.getMonacoEditorValue())
-        if (!fileNames.contains(currFileName)) {
-            fileNames.add(currFileName)
-            EditorView.fillFileNames(fileNames)
-        }
+            .then {
+                if (!fileNames.contains(currFileName)) {
+                    fileNames.add(currFileName)
+                    EditorView.fillFileNames(fileNames)
+                }
+
+                EditorView.showToast("File $currFileName saved successfully", true)
+                null
+            }.catch {
+                EditorView.showToast(it.toString(), false)
+                null
+            }
     }
 
     internal fun deleteFile(fileName: String) {
-        EditorModel.deleteFile(fileName).then {
-            fileNames.remove(fileName)
-            EditorView.fillFileNames(fileNames)
+        EditorModel.deleteFile(fileName)
+            .then {
+                fileNames.remove(fileName)
+                EditorView.fillFileNames(fileNames)
+                EditorView.showToast("File $fileName removed successfully", true)
 
-            if (fileName == currFileName) {
-                openAnyFile()
+                if (fileName == currFileName) {
+                    openAnyFile()
+                }
+                null
+            }.catch {
+                EditorView.showToast(it.toString(), false)
+                null
             }
-
-            null
-        }
     }
 
     internal fun openFile(fileName: String) {
-        EditorModel.loadFileContent(fileName).then {
-            it as File
+        EditorModel.loadFileContent(fileName)
+            .then {
+                it as File
 
-            currFileName = fileName
-            EditorView.fillFile(fileName, it.body)
-
-            null
-        }
+                currFileName = fileName
+                EditorView.fillFile(fileName, it.body)
+                null
+            }.catch {
+                EditorView.showToast(it.toString(), false)
+                null
+            }
     }
 
     internal fun init() {
         EditorView.init()
         EditorView.fillLangSyntax()
-        EditorModel.loadFileNames().then {
-            it as JsArray<JsString>
+        EditorModel.loadFileNames()
+            .then {
+                it as JsArray<JsString>
 
-            for (i in 0..<it.length) {
-                fileNames.add(it[i].toString())
+                for (i in 0..<it.length) {
+                    fileNames.add(it[i].toString())
+                }
+
+                EditorView.fillFileNames(fileNames)
+                openAnyFile()
+                null
+            }.catch {
+                EditorView.showToast(it.toString(), false)
+                null
             }
-
-            EditorView.fillFileNames(fileNames)
-            openAnyFile()
-
-            null
-        }
     }
 
 }

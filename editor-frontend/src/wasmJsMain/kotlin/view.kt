@@ -1,3 +1,5 @@
+import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlinx.dom.appendElement
 import kotlinx.dom.appendText
 import org.w3c.dom.*
@@ -79,5 +81,20 @@ object EditorView {
         JSObjects.saveEl.onclick = {
             EditorController.saveCurrFile()
         }
+    }
+
+    internal fun showToast(text: String, success: Boolean) {
+        document.body?.appendElement("div") {
+            className = "toast ${if (success) "success" else "error"}"
+
+            appendText(text)
+
+            window.setTimeout({
+                this.remove()
+
+                null
+            }, 2000)
+        }
+
     }
 }
